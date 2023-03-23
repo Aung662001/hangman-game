@@ -9,9 +9,8 @@ function getWord() {
 }
 
 function App() {
-  const [guessLetter, setGuessLetter] = useState<string[]>([]); //apple
-  const [wordToGuess, setWordToGuess] = useState(getWord()); //arrow
-
+  const [guessLetter, setGuessLetter] = useState<string[]>([]);
+  const [wordToGuess, setWordToGuess] = useState(getWord());
   const incorrectLetters = guessLetter.filter(
     (letter) => !wordToGuess.includes(letter)
   );
@@ -62,13 +61,13 @@ function App() {
       <div style={{ fontSize: "2rem", textAlign: "center", fontWeight: "500" }}>
         {isLoser ? (
           <div style={{ color: "red" }}>
-            <b>OOP! Refresh To Try Again</b>
+            <b>OOP! Press Enter To Try Again</b>
           </div>
         ) : (
           ""
         )}
         {isWinner ? (
-          <div style={{ color: "green" }}>You Win-Refresh for NextGame</div>
+          <div style={{ color: "green" }}>You Win-Press Enter for NextGame</div>
         ) : (
           ""
         )}
