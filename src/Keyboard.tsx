@@ -1,6 +1,6 @@
 import { Key } from "react";
 import styles from "./Keyboard.module.css";
-const KEYS = [
+export const KEYS = [
   "a",
   "b",
   "c",

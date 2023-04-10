@@ -2,7 +2,7 @@ import { KeyboardEventHandler, useCallback, useEffect, useState } from "react";
 import words from "./wordList.json";
 import Hangmandrawing from "./Hangmandrawing";
 import HangmanWord from "./HangmanWord";
-import Keyboard from "./Keyboard";
+import Keyboard, { KEYS } from "./Keyboard";
 
 function getWord() {
   return words[Math.floor(Math.random() * words.length)];
@@ -22,6 +22,7 @@ function App() {
 
   const addGuessLetter = useCallback(
     (letter: string) => {
+      console.log(letter);
       if (guessLetter.includes(letter) || isLoser || isWinner) return;
       setGuessLetter((currentLetters) => [...currentLetters, letter]);
     },
@@ -31,12 +32,19 @@ function App() {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       e.preventDefault();
-      const key = e.key;
-      if (key != "Enter") return;
-
-      e.preventDefault();
-      setWordToGuess(getWord());
-      setGuessLetter([]);
+      let key = e.key;
+      if (key != "Enter") {
+        if (KEYS.includes(key)) {
+          addGuessLetter(key);
+        }
+      } else if (key === "Enter") {
+        e.preventDefault();
+        setWordToGuess(getWord());
+        setGuessLetter([]);
+      } else {
+        return;
+      }
+      // if (key != "Enter") return;
     };
     console.log(guessLetter);
     document.addEventListener("keypress", handler);
